@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    weight: 100%;
+}
+
+
+h1,p {
+    display: flex;
+    justify-content: center;
+}
+h1 {
+    color: darkblue;
+}
+
+.flx-cont {
+    display: flex;
+    justify-content: space-around;
+}
+.copyright {
+    font-size: 0.5em;
+    justify-content: flex-end;
+}
+li {
+    display: inline-block;
+    margin: 3em 1em;
+    font-size: 2em;
+    color: darkgreen;
+}
