@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    justify-content: center;
+    color: darkblue;
+}
+
+p {
+    display: flex;
+}
+
+nav p {
+    justify-content: center;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3em;
+    list-style: none;
+    font-size: 2em;
+    color: darkslateblue;
+}
+
+footer p {
+    justify-content: flex-end;
+    font-size: 0.5em;
+}
+
+footer {
+    margin-top: 2em;
+}
