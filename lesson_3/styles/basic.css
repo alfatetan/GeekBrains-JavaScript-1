@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100%;
+}
+
+header h1 {
+    color: darkblue;
+    display: flex;
+    justify-content: center;
+}
+
+article ul {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.3em;
+    color: darkgreen;
+    margin: 2em 0em;
+}
+
+footer p {
+    display: flex;
+    justify-content: flex-end;
+}
