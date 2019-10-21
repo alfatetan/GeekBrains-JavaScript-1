@@ -9,68 +9,60 @@
 */
 
 
-function Car(fuelVolume = 60, fuelConsumption = 10, fuel = 0) {
-    this.fuelConsumption = Number(fuelConsumption); //средний расход топлива
-    this.fuelVolume = Number(fuelVolume); //объём бака
+function Car(name='') {
+    this.carName = name;
     this.odometer = 0;
-    this.fuel = Number(fuel);
 }
 
-Car.prototype.refuel = (volume) => {
-    this.fuel += Number(volume);
-    if (this.fuel > this.fuelVolume) {
-        console.log(`Бак заполнен полностью и составляет ${this.fuelVolume}. Однако ${this.fuel - this.fuelVolume}`);
-        this.fuel = this.fuelVolume;
+Car.prototype.go = function(value=0) {
+    this.odometer = (value > 0) ? (this.odometer + value) : (this.odometer - value);
+    console.log(`Машина проехала ${value} км. Всего машина проехала ${this.odometer}`)
+}
+
+Car.prototype.beep = function(value=1) {
+    console.log(`Машина просигналила ${value} раз!!!`);
+}
+
+function CarWithFlashLight (name) {
+    Car.call(this, name);
+    this.flashLight = false;
+}
+
+CarWithFlashLight.prototype = Object.create(Car.prototype);
+CarWithFlashLight.prototype.constructor = CarWithFlashLight;
+
+
+CarWithFlashLight.prototype.flash = function() {
+    if (this.flashLight) {
+        this.flashLight = false;
+        console.log(`Проблесковый маячок выключен`);
     } else {
-        console.log(`Бак заполнен, в баке ${this.fuel} литров бензина!`);
+        this.flashLight = true;
+        console.log(`Проблесковый маячок включен`);
     }
 }
 
-Car.prototype.beep = (times = 1) => {
-    console.log(`Машина посигналиа ${times} раз!!!`);
+function FireCar (name) {
+    CarWithFlashLight.call(this, name);
+    this.tank = 0;
 }
 
-Car.prototype.go = (time = 0, speed = 0) => {
-    let lenght = this.speed * this.time;
-    let requiredFuel = lenght / this.fuelConsumption;
-    if (requiredFuel > this.fuel) {
-        console.log(`Бензина не хватит чтобы проехать расстояние в ${lenght} км.`);
-        console.log(`В баке только на ${this.fuel / this.fuelConsumption * 100}`);
-        return;
-    } else {
-        this.odometer += lenght;
-        console.log(`Машина проехала ${lenght} км. Общий километраж ${this.odometer}`);
-    }
+FireCar.prototype = Object.create(CarWithFlashLight.prototype);
+FireCar.prototype.constructor = FireCar;
+
+FireCar.prototype.stew = function (value) {
+    this.tank -= value;
+    console.log(`Тушили пожар... Было израсходовано ${value} литров воды. Всего осталось ${this.tank}`);
 }
 
-function CarWithFlashingLight (fuelVolume = 60, fuelConsumption = 10, fuel = 0) {
-    Car.call(fuelVolume, fuelConsumption, fuel);
-    this.flash = false;
+FireCar.prototype.reloadWater = function (value) {
+    this.tank += value;
+    console.log(`В танк было залито ${value} литров воды. Всего в танке ${this.tank} литров.`);
 }
-
-CarWithFlashingLight.prototype.flashLight = () => {
-    if (this.flash) {
-        this.flash = false;
-        console.log(`Мигалка выключена`);
-    } else {
-        this.flash = true;
-        console.log('Мигалка включена')
-    }
-}
-
-function PoliceCar(fuelVolume = 60, fuelConsumption = 10, fuel = 0) {
-    CarWithFlashingLight.call(this, fuelVolume, fuelConsumption, fuel);
-    this.forsage = false;
-}
-
-//Вот тут и нажно посмотреть каким образом полиморфируется метод go
-PoliceCar.prototype.go = (time = 0, speed = 0) => {
-    degugger;
-}
-
 
 function startCarsScript() {
-    const skoda = new Car();
-    skoda.refuel(100);
+    const skoda = new Car('Skoda');
+    const audi = new CarWithFlashLight('Audi');
+    const dodge = new FireCar('Dodge firecar')
     debugger;
 }
